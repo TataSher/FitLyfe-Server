@@ -38,18 +38,18 @@ test("GET /workout", async () => {
 		.get("/workout")
 		.expect(200)
 		.then((res) => {
-      console.log(res.body[0])
+      const workoutResponse = res.body[0];
       
       // Check the response type and length
       expect(res.body.length).toEqual(1)
       // Checking the exercises
+      const exercisesResponse = workoutResponse.exercises[0];
+
+      expect(exercisesResponse.title).toEqual("Squats")
+      expect(exercisesResponse.duration).toEqual(60)
+      expect(exercisesResponse.description).toEqual("Ow my legs hurt")
+      expect(exercisesResponse.image).toEqual("bufflegs.png")
       
-			// expect(exercises.length).toEqual(1)
-      // expect(exercises[0].title).toEqual("Squats")
-      // expect(exercises[0].duration).toEqual(60)
-      // expect(exercises[0].description).toEqual("Ow my legs hurt")
-      // expect(exercises[0].image).toEqual("bufflegs.png")
-			// Check the workoutTitle
-      expect(res.body[0].workoutTitle).toEqual(workout.workoutTitle)
+      expect(workoutResponse.workoutTitle).toEqual(workout.workoutTitle)
 		})
 })
