@@ -53,3 +53,41 @@ test("GET /workout", async () => {
       expect(workoutResponse.workoutTitle).toEqual(workout.workoutTitle)
 		})
 })
+
+test("POST /workout", async () => {
+  // Send the workout data
+  const workoutTitle = "Leg day"
+  const exercises = [{ 
+    title: "Squats",
+    duration: 60,
+    description: "Ow my legs hurt",
+    image: "bufflegs.png"
+   }]
+   const data = { workoutTitle, exercises }
+ 
+   await supertest(app)
+    .post("/workout")
+    .send(data)
+    .expect(200)
+    .then(async (res) => {
+      const workoutResponse = res.body;
+      console.log(res.body)
+
+      // Checking the exercises
+      const exercisesResponse = workoutResponse.exercises[0];
+
+      expect(exercisesResponse.title).toEqual("Squats")
+      expect(exercisesResponse.duration).toEqual(60)
+      expect(exercisesResponse.description).toEqual("Ow my legs hurt")
+      expect(exercisesResponse.image).toEqual("bufflegs.png")
+      
+      expect(workoutResponse.workoutTitle).toEqual(workoutTitle)
+
+      // Checking data is in the database
+      const workoutDb = await Workout.findOne({_id: res.body._id})
+      expect(workoutDb).toBeTruthy()
+      expect(workoutDb.workoutTitle).toBe(workoutTitle)
+
+  
+    });
+})
