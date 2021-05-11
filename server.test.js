@@ -32,7 +32,7 @@ test("GET /workout", async () => {
    }]
    
   const workout = new Workout({ workoutTitle, exercises });
-    await workout.save();
+  await workout.save();
 
 	await supertest(app)
 		.get("/workout")
@@ -71,23 +71,62 @@ test("POST /workout", async () => {
     .expect(200)
     .then(async (res) => {
       const workoutResponse = res.body;
-      console.log(res.body)
-
-      // Checking the exercises
       const exercisesResponse = workoutResponse.exercises[0];
 
+      // Checking the workoutTitle
+      expect(workoutResponse.workoutTitle).toEqual(workoutTitle)
+
+      // Checking the exercises
       expect(exercisesResponse.title).toEqual("Squats")
       expect(exercisesResponse.duration).toEqual(60)
       expect(exercisesResponse.description).toEqual("Ow my legs hurt")
       expect(exercisesResponse.image).toEqual("bufflegs.png")
       
-      expect(workoutResponse.workoutTitle).toEqual(workoutTitle)
-
-      // Checking data is in the database
+      // Checking workout is saved in the database
       const workoutDb = await Workout.findOne({_id: res.body._id})
       expect(workoutDb).toBeTruthy()
       expect(workoutDb.workoutTitle).toBe(workoutTitle)
-
-  
     });
+})
+
+test("GET /workout:id", async () => {
+  // Save the workout
+  var workoutTitle = "Leg day"
+  var exercises = [{ 
+    title: "Squats",
+    duration: 60,
+    description: "Ow my legs hurt",
+    image: "bufflegs.png"
+   }]
+   
+  const workoutOne = new Workout({ workoutTitle, exercises });
+  await workoutOne.save();
+
+  workoutTitle = "Upper body day"
+  exercises = [{ 
+    title: "Bicep curls",
+    duration: 30,
+    description: "Ow my arms hurt",
+    image: "buffarms.png"
+   }]
+
+  const workoutTwo = new Workout({ workoutTitle, exercises });
+  await workoutTwo.save();
+
+	await supertest(app)
+		.get(`/workout/${workoutTwo._id}`)
+		.expect(200)
+		.then((res) => {
+      const workoutTwoResponse = res.body;
+      
+      // Checking the exercises
+      const exercisesResponse = workoutTwoResponse.exercises[0];
+
+      expect(exercisesResponse.title).toEqual(exercises[0].title)
+      expect(exercisesResponse.duration).toEqual(exercises[0].duration)
+      expect(exercisesResponse.description).toEqual(exercises[0].description)
+      expect(exercisesResponse.image).toEqual(exercises[0].image)
+      
+      expect(workoutTwoResponse.workoutTitle).toEqual(workoutTitle)
+		})
 })

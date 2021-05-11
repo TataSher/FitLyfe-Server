@@ -10,6 +10,16 @@ router.get('/workout', async (req, res) => {
   res.send(workouts);
 });
 
+router.get('/workout/:id', async (req, res) => {
+  try {
+    const workout = await Workout.findOne({ _id: req.params.id });
+    res.send(workout);
+  } catch {
+    res.status(404);
+    res.send({ error: "Workout doesn't exist!" });
+  }
+});
+
 router.post('/workout', async (req, res) => {
   const { workoutTitle, exercises } = req.body;
   
