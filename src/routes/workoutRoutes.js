@@ -34,7 +34,6 @@ router.post('/workout', async (req, res) => {
   } catch (err) {
     res.status(422).send({ error: err.message });
   }
-
 });
 
 module.exports = router;

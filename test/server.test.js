@@ -82,7 +82,28 @@ test("POST /workout failing request", async () => {
     .post("/workout")
     .expect(422)
     .then( (res) => {
+      expect(res.body.error).toBeTruthy;
       expect(res.body.error).toEqual("You must provide a workout title and exercises");
+    });
+})
+
+test("POST /workout failed request, no exercise title", async () => {
+  // Send the workout data
+  const workoutTitle = 50
+  const exercises = [{ 
+    duration: 60,
+    description: "Ow my legs hurt",
+    image: "bufflegs.png"
+   }]
+   const data = { workoutTitle, exercises }
+ 
+   await supertest(app)
+    .post("/workout")
+    .send(data)
+    .expect(422)
+    .then( (res) => {
+      expect(res.body.error).toBeTruthy;
+      expect(res.body.error).toEqual("Workout validation failed: exercises.0.title: Path `title` is required.");
     });
 })
 
@@ -133,7 +154,7 @@ test("GET /workout:id failing request", async () => {
 		.get(`/workout/1`)
 		.expect(404)
 		.then((res) => {
-      console.log(res.body)
+      expect(res.body.error).toBeTruthy;
       expect(res.body.error).toEqual("Workout doesn't exist!")
 		})
 })
