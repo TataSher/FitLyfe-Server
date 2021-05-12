@@ -24,7 +24,7 @@ router.post('/workout', async (req, res) => {
   const { workoutTitle, exercises } = req.body;
   
   if (!workoutTitle || !exercises) {
-    return res.status(422).send({ error: "You must provide a workout title and exercises"})
+    return res.status(422).send({ error: "You must provide a workout title and exercises" })
   }
 
   try {

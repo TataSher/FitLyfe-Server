@@ -1,6 +1,6 @@
 const express = require("express")
-require('./src/models/workout');
-const routes = require('./src/routes/workoutRoutes')
+require('../src/models/workout');
+const routes = require('../src/routes/workoutRoutes')
 
 function createServer() {
 	const app = express()

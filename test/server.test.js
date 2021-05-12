@@ -57,7 +57,7 @@ test("POST /workout", async () => {
     .post("/workout")
     .send(data)
     .expect(200)
-    .then(async (res) => {
+    .then( async (res) => {
       const workoutResponse = res.body;
       const exercisesResponse = workoutResponse.exercises[0];
 
@@ -77,7 +77,16 @@ test("POST /workout", async () => {
     });
 })
 
-test("GET /workout:id", async () => {
+test("POST /workout failing request", async () => {
+  await supertest(app)
+    .post("/workout")
+    .expect(422)
+    .then( (res) => {
+      expect(res.body.error).toEqual("You must provide a workout title and exercises");
+    });
+})
+
+test("GET /workout:id passing request", async () => {
   // Save the workout
   var workoutTitle = "Leg day"
   var exercises = [{ 
@@ -116,5 +125,15 @@ test("GET /workout:id", async () => {
       expect(exercisesResponse.image).toEqual(exercises[0].image)
       
       expect(workoutTwoResponse.workoutTitle).toEqual(workoutTitle)
+		})
+})
+
+test("GET /workout:id failing request", async () => {
+	await supertest(app)
+		.get(`/workout/1`)
+		.expect(404)
+		.then((res) => {
+      console.log(res.body)
+      expect(res.body.error).toEqual("Workout doesn't exist!")
 		})
 })
