@@ -3,6 +3,7 @@
 ## Instructions
 
 - `npm i` to install depdencies
+- To start mongodb locally `brew services run mongodb-community`
 - To run the server `npm run dev`
 
 ## Dependencies
