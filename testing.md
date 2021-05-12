@@ -20,5 +20,3 @@ Created server.test.js
 Creates connection to db and cleans up connection
 
 server.test.js has all tests and everything.
-
-
