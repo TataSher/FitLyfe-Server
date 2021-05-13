@@ -15,8 +15,9 @@ const workoutSchema = mongoose.Schema({
     type: String,
     required: true
   },
-  
   exercises: [exerciseSchema]
 });
+
+workoutSchema.set('timestamps', true);
 
 mongoose.model('Workout', workoutSchema);

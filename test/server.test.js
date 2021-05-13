@@ -197,7 +197,14 @@ test("PUT /workout:id passing request", async () =>{
     duration: 60,
     description: "Ow my legs hurt",
     image: "bufflegs.png"
-   }]
+   },
+   { 
+    title: "Lunges",
+    duration: 60,
+    description: "Ow my legs hurt",
+    image: "bufflegs.png"
+   },
+  ]
    
   const workout = new Workout({ workoutTitle, exercises });
   await workout.save();
@@ -226,6 +233,7 @@ test("PUT /workout:id passing request", async () =>{
       const updatedWorkout = await Workout.findOne({_id: workout._id})
       const updatedExercises = updatedWorkout.exercises[0]
       expect(updatedWorkout.workoutTitle).toEqual(workoutTitle)
+      expect(updatedWorkout.exercises.length).toEqual(1)
       
       expect(updatedExercises.title).toEqual(exercises[0].title)
       expect(updatedExercises.duration).toEqual(exercises[0].duration)
