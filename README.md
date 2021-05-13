@@ -2,6 +2,8 @@
 
 ## Project goal
 
+This repository contains the backend node server, we created the frontend in react-native [here](https://github.com/Emmapr123/ControLLyfe-ReactNative).
+
 ## Instructions
 
 - `npm i` to install depdencies
