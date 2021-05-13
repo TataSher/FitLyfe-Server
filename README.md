@@ -1,18 +1,18 @@
 # ControLLyfe server
 
-## Dependencies
+## Instructions
 
+- `npm i` to install depdencies
+- To start mongodb locally `brew services run mongodb-community`
+- To run the server `npm run dev`
+
+## Dependencies
+Development
 - Express
 - JsonWebTokens
-- Nodemon: auto restarts server
 - bcrypt
 - Mongoose
-
-## Steps
-
-Initialise package.json, dev and production dependencies,
-```zsh
-npm i bcrypt express jsonwebtoken mongoose
-npm i --save-dev nodemon  
-```
-
+Dev:
+- Nodemon: auto restarts server
+- Jest
+- Supertest
