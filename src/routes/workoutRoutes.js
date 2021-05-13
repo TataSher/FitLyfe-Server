@@ -36,4 +36,27 @@ router.post('/workout', async (req, res) => {
   }
 });
 
+router.delete('/workout/:id', async (req, res) => {
+  try {
+    await Workout.findOneAndRemove({ _id: req.params.id });
+    res.send({ message: "Deleted" });
+  } catch {
+    res.status(404).send({ error: "Workout doesn't exist!"});
+  }
+});
+
+router.put('/workout/:id', async (req, res) => {
+  try {
+    await Workout.findByIdAndUpdate(req.params.id, {
+      workoutTitle: req.body.workoutTitle,
+      exercises: req.body.exercises
+    });
+
+    res.send({ message: "Workout updated" });      
+
+    } catch(err) {
+      res.status(404).send({ error: "Workout doesn't exist!"});
+  }
+});
+
 module.exports = router;
