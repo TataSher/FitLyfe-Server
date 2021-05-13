@@ -158,3 +158,35 @@ test("GET /workout:id failing request", async () => {
       expect(res.body.error).toEqual("Workout doesn't exist!")
 		})
 })
+
+test("DELETE /workout:id passing request", async () =>{
+  const workoutTitle = "Leg day"
+  const exercises = [{ 
+    title: "Squats",
+    duration: 60,
+    description: "Ow my legs hurt",
+    image: "bufflegs.png"
+   }]
+   
+  const workout = new Workout({ workoutTitle, exercises });
+  await workout.save();
+
+  await supertest(app)
+		.delete(`/workout/${workout._id}`)
+		.expect(200)
+		.then((res) => {
+      expect(res.body.message).toBeTruthy;
+      expect(res.body.message).toEqual("Deleted")
+    })
+})
+
+test("DELETE /workout:id failing request", async () => {
+	await supertest(app)
+		.delete(`/workout/1`)
+		.expect(404)
+		.then((res) => {
+      expect(res.body.error).toBeTruthy;
+      expect(res.body.error).toEqual("Workout doesn't exist!")
+		})
+})
+
