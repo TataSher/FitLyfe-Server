@@ -9,7 +9,7 @@ setupDatabase();
 
 const app = createServer();
 
-test("POST /signup passing test", async () => {
+test("POST /signup passing request", async () => {
   // Send user data:
 
   const username = "taran314";
@@ -29,7 +29,7 @@ test("POST /signup passing test", async () => {
     })
 })
 
-test("POST /signup failing test", async () => {
+test("POST /signup failing request", async () => {
   await supertest(app)
     .post("/signup")
     .send({})
@@ -39,15 +39,13 @@ test("POST /signup failing test", async () => {
     })
 })
 
-test("POST /signin passing test", async () => {
-  const username = "taran314";
-  const password = "taranisthebest";
-
-  const user = new User({ username, password });
-  await user.save();
+test("POST /signin passing request", async () => {
+  var username = "taran314";
+  var password = "taranisthebest";
 
   const data = { username, password}
 
+  // Mock data by populating db with seed data in helper?
   await supertest(app)
     .post("/signup")
     .send(data)
@@ -64,3 +62,29 @@ test("POST /signin passing test", async () => {
       expect(res.body.token).toBeTruthy();
     })
 })
+
+test("POST /signin no username or password sent", async () => {
+  await supertest(app)
+    .post("/signin")
+    .send({})
+    .expect(422)
+    .then( (res) => {
+      expect(res.body.error).toEqual("Must provide username and password")
+    })
+})
+
+test("POST /signin user has not signed up", async () => {
+  const username = "taran314";
+  const password = "taranisthebest";
+
+  const data = { username, password}
+  await supertest(app)
+    .post("/signin")
+    .send(data)
+    .expect(422)
+    .then( (res) => {
+      expect(res.body.error).toEqual("Invalid password or username")
+    })
+})
+
+// Data needs to be seeded before we can cover line 45 on authRoutes.
