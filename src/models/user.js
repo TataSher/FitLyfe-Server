@@ -15,6 +15,7 @@ const userSchema = new mongoose.Schema({
 
 // pre save hook - have to use function() so we can use this
 // Hook triggers upon creating or updating a user
+
 userSchema.pre('save', function(next) {
   const user = this;
   // isModified checks if the document was modified
