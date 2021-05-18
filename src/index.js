@@ -19,9 +19,8 @@ mongoose.connect(mongoURI, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
-// true stuff prevents errors/warnings apparently
 
-// Messages for connected or if error
+// Messages for connected or error
 mongoose.connection.on('connected', () => {
   console.log('Connected to mongo instance!');
 });

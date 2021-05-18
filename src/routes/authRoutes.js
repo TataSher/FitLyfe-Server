@@ -15,7 +15,8 @@ router.post('/signup', async (req, res) => {
     // Change secret key to env variable
     // Sign JWT with userid so future reqs can send JWT with data
     const token = jwt.sign({ userId: user._id }, 'MY_SECRET_KEY' );
-    res.send({ token });
+    // Token stuff not working so also sending userId
+    res.send({ token, userId: user._id });
   } catch (err) {
     return res.status(422).send({ error: "Signup failed, try again" });
   }
@@ -40,7 +41,7 @@ router.post('/signin', async (req, res) => {
   try {
     await user.comparePassword(password);
     const token = jwt.sign({ userId: user._id }, 'MY_SECRET_KEY');
-    res.send({ token });
+    res.send({ token, userId: user._id });
   } catch (err) {
     return res.status(422).send({ error: "Invalid password or username" });
   }

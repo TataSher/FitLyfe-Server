@@ -1,11 +1,11 @@
 const express = require('express');
 const mongoose = require('mongoose');
-
 const Workout = mongoose.model('Workout');
 
 const router = express.Router();
 
 router.get('/workout', async (req, res) => {
+  // gets all
   const workouts = await Workout.find({});
   res.send(workouts);
 });
@@ -21,14 +21,14 @@ router.get('/workout/:id', async (req, res) => {
 });
 
 router.post('/workout', async (req, res) => {
-  const { workoutTitle, exercises } = req.body;
+  const { workoutTitle, exercises, user } = req.body;
   
-  if (!workoutTitle || !exercises) {
+  if (!workoutTitle || !exercises || !user) {
     return res.status(422).send({ error: "You must provide a workout title and exercises" })
   }
 
   try {
-    const workout = new Workout({ workoutTitle, exercises });
+    const workout = new Workout({ workoutTitle, exercises, user });
     await workout.save();
     res.send(workout);
   } catch (err) {
