@@ -1,7 +1,9 @@
 require('./models/workout');
+require('./models/user')
 const express = require('express');
 const mongoose = require('mongoose');
 const workoutRoutes = require('./routes/workoutRoutes');
+const authRoutes = require('./routes/authRoutes');
 
 const app = express();
 
@@ -9,6 +11,7 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
 app.use(workoutRoutes);
+app.use(authRoutes);
 
 const mongoURI = "mongodb+srv://admin:passwordpassword@cluster0.cfznd.mongodb.net/backendTest?retryWrites=true&w=majority";
 
