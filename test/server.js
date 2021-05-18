@@ -1,11 +1,14 @@
-const express = require("express")
+const express = require("express");
 require('../src/models/workout');
-const routes = require('../src/routes/workoutRoutes')
+require('../src/models/user');
+const workoutRoutes = require('../src/routes/workoutRoutes');
+const authRoutes = require('../src/routes/authRoutes');
 
 function createServer() {
 	const app = express()
 	app.use(express.json())
-	app.use(routes)
+	app.use(workoutRoutes)
+	app.use(authRoutes)
 	return app
 }
 

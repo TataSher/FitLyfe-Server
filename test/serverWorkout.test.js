@@ -28,8 +28,6 @@ test("GET /workout", async () => {
     .then((res) => {
     const workoutResponse = res.body[0];
 	  
-    // Check the response type and length
-    expect(res.body.length).toEqual(1)
     // Checking the exercises
     const exercisesResponse = workoutResponse.exercises[0];
 
