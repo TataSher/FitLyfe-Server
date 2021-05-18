@@ -13,7 +13,7 @@ app.use(express.json());
 app.use(workoutRoutes);
 app.use(authRoutes);
 
-const mongoURI = "mongodb+srv://admin:passwordpassword@cluster0.cfznd.mongodb.net/backendTest?retryWrites=true&w=majority";
+const mongoURI = "mongodb+srv://admin:passwordpassword@cluster0.cfznd.mongodb.net/frontendTest?retryWrites=true&w=majority";
 
 mongoose.connect(mongoURI, {
   useNewUrlParser: true,

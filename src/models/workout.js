@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 
 const exerciseSchema = mongoose.Schema({
   title: {
@@ -15,7 +16,11 @@ const workoutSchema = mongoose.Schema({
     type: String,
     required: true
   },
-  exercises: [exerciseSchema]
+  exercises: [exerciseSchema],
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+  }
 });
 
 workoutSchema.set('timestamps', true);
