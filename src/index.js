@@ -2,11 +2,13 @@ require('./models/workout');
 require('./models/user')
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors');
 const workoutRoutes = require('./routes/workoutRoutes');
 const authRoutes = require('./routes/authRoutes');
 
 const app = express();
 
+app.use(cors);
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
