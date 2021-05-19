@@ -8,7 +8,7 @@ const authRoutes = require('./routes/authRoutes');
 
 const app = express();
 
-const PORT = process.env.PORT || 3000;
+// const PORT = process.env.PORT || 3000;
 
 app.use(cors);
 app.options('*', cors());
@@ -34,6 +34,6 @@ mongoose.connection.on('error', () => {
   console.error('You don goofed', err);
 });
 
-app.listen(PORT, () => {
-	console.log(`Server is working on ${PORT}`);
-});
+app.listen(80, function () {
+  console.log('CORS-enabled web server listening on port 80')
+})
