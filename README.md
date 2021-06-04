@@ -1,8 +1,10 @@
 # ControLLyfe server
 
-## Project goal
+## Project Overview
 
+FitLyst is our final project at Makers which is a fitness app which lets you create and track customisable workouts!
 This repository contains the backend node server, we created the frontend in react-native [here](https://github.com/Emmapr123/ControLLyfe-ReactNative).
+See our presentation for the app [here](https://docs.google.com/presentation/d/1RAreAAcFBBwqKJzzTdg3jYobHmaJ4x4WhKINr6EscDw/edit?usp=sharing).
 
 ## Instructions
 
@@ -11,13 +13,12 @@ This repository contains the backend node server, we created the frontend in rea
 - To run the server `npm run dev`
 
 ## Dependencies
-Development
 - Express
 - JsonWebTokens
 - bcrypt
 - Mongoose
-Dev:
-- Nodemon: auto restarts server
+Development:
+- Nodemon
 - Jest
 - Supertest
 
@@ -35,7 +36,7 @@ Dev:
 | POST /signup      | Create new user          |:heavy_check_mark:|
 | POST /signin      | Authenticates user       |:heavy_check_mark:|
 
-Notes
+API Notes
 --------
 
 - Example Input for POST /signup and POST /signin (need to provide username and password)
