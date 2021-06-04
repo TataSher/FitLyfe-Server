@@ -2,13 +2,13 @@
 
 ## Project Overview
 
-FitLyst is our final project at Makers which is a fitness app which lets you create and track customisable workouts!
-This repository contains the backend node server, we created the frontend in react-native [here](https://github.com/Emmapr123/ControLLyfe-ReactNative).
-See our presentation for the app [here](https://docs.google.com/presentation/d/1RAreAAcFBBwqKJzzTdg3jYobHmaJ4x4WhKINr6EscDw/edit?usp=sharing).
+- FitLyst is our final project at Makers which is a fitness app which lets you create and track customisable workouts!
+- This repository contains the backend node server, we created the frontend in react-native [here](https://github.com/Emmapr123/ControLLyfe-ReactNative).
+- See our presentation for the app [here](https://docs.google.com/presentation/d/1RAreAAcFBBwqKJzzTdg3jYobHmaJ4x4WhKINr6EscDw/edit?usp=sharing).
 
 ## Instructions
 
-- `npm i` to install depdencies
+- `npm i` to install dependencies
 - `npm i --save-dev nodemon`
 - To run the server `npm run dev`
 
