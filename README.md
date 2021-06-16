@@ -1,4 +1,4 @@
-# FitLyfe server
+# FitLyst server
 
 ## Project Overview
 
