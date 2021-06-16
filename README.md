@@ -1,4 +1,4 @@
-# ControLLyfe server
+# FitLyfe server
 
 ## Project Overview
 
@@ -83,3 +83,7 @@ Example output
     "__v": 0
 }
 ```
+
+## Team
+
+Emma Priester | Tarandeep Nandhra | Ralph Bartley | Natalia Sherchenkova
